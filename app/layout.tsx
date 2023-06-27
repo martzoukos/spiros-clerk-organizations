@@ -1,5 +1,7 @@
+import { ClerkProvider, SignedIn, SignedOut, UserProfile } from '@clerk/nextjs'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,8 +16,34 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>  
+          <header className='flex justify-between p-3 bg-slate-100 mb-3'>
+            <nav>
+              <Link className='p-1 hover:underline' href={'/'}>
+                Home
+              </Link>
+              <Link className='p-1 hover:underline' href={'/pricing'}>
+                Pricing
+              </Link>
+            </nav>
+            <div>
+              <SignedIn>
+                <UserProfile />
+              </SignedIn>
+              <SignedOut>
+                <Link className='p-1 hover:underline' href={'/sign-in'}>
+                  Sign in
+                </Link>
+              </SignedOut>
+            </div>
+          </header>
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
