@@ -32,7 +32,7 @@ export default function RootLayout({
               <SignedIn>
                 <div className='flex items-center'>
                   <Link href='/dashboard' className='mr-2 '>Dashboard</Link>
-                  <UserButton />
+                  <UserButton afterSignOutUrl='/' />
                 </div>
               </SignedIn>
               <SignedOut>
