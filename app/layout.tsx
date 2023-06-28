@@ -1,4 +1,4 @@
-import { ClerkProvider, SignedIn, SignedOut, UserProfile } from '@clerk/nextjs'
+import { ClerkProvider, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
@@ -30,7 +30,10 @@ export default function RootLayout({
             </nav>
             <div>
               <SignedIn>
-                <UserProfile />
+                <div className='flex items-center'>
+                  <Link href='/dashboard' className='mr-2 '>Dashboard</Link>
+                  <UserButton />
+                </div>
               </SignedIn>
               <SignedOut>
                 <Link className='p-1 hover:underline' href={'/sign-in'}>
